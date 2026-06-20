@@ -14,7 +14,7 @@
     <div id="preloader">
         <div class="loader-content">
             <div class="spinner"></div>
-            <p>Cargando elementos y documentación...</p>
+            <p>Iniciando sistema y estabilizando interfaz...</p>
         </div>
     </div>
 
@@ -24,6 +24,7 @@
         <div class="aurora aurora-1"></div>
         <div class="aurora aurora-2"></div>
         <div class="aurora aurora-3"></div>
+        <div class="aurora aurora-4"></div>
     </div>
 
     <div class="bubbles-container" id="bubbles">
@@ -44,10 +45,10 @@
         <ul class="nav-links">
             <li><a href="#introduccion">Introducción</a></li>
             <li><a href="#materiales">Materiales</a></li>
+            <li><a href="#galeria">Galería</a></li>
             <li><a href="#gady">Manual</a></li>
             <li><a href="#desarrollo">Desarrollo</a></li>
             <li><a href="#descargas">Descargas</a></li>
-            <li><a href="#fuentes">Fuentes</a></li>
         </ul>
     </nav>
 
@@ -55,16 +56,52 @@
         <section id="inicio" class="hero-section">
             <div class="container hero-container init-hidden">
                 <div class="badge-container">
-                    <span class="badge glowing-border">PROYECTO DE ROBÓTICA • 4TO 1RA • 2026</span>
+                    <span class="badge glowing-border pulse-slow">PROYECTO DE ROBÓTICA • 4TO 1RA • 2026</span>
                 </div>
                 <h1 class="gradient-text">Robot con<br>Brazo Robótico</h1>
                 <p class="subtitle">Desarrollo de un prototipo robótico móvil equipado con un brazo articulado. Su objetivo principal es facilitar el transporte y recolección de objetos a distancia sin requerir esfuerzo físico por parte del usuario.</p>
                 <div class="hero-actions">
-                    <a href="#descargas" class="drive-btn hover-glow">Ir a Descargas</a>
+                    <a href="#descargas" class="drive-btn hover-glow">Centro de Descargas</a>
                 </div>
-                <div class="team-card">
-                    <p style="font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px;">Jorquera Bautista • Romeu Eduardo • Briones Gadiel • Machado Axl • Condori Laila • Cabrera Agostina • Polanco Camila • Godoy Sonia</p>
+                
+                <div class="team-container mt-4 animate-on-scroll">
+                    <h3 class="team-title">Integrantes del Equipo</h3>
+                    <div class="team-grid-modern">
+                        <div class="team-member-card">
+                            <span class="member-name">Bautista Jorquera</span>
+                            <span class="member-role">Rol a definir</span>
+                        </div>
+                        <div class="team-member-card">
+                            <span class="member-name">Eduardo Romeu</span>
+                            <span class="member-role">Rol a definir</span>
+                        </div>
+                        <div class="team-member-card">
+                            <span class="member-name">Gadiel Briones</span>
+                            <span class="member-role">Rol a definir</span>
+                        </div>
+                        <div class="team-member-card">
+                            <span class="member-name">Axl Machado</span>
+                            <span class="member-role">Rol a definir</span>
+                        </div>
+                        <div class="team-member-card">
+                            <span class="member-name">Laila Condori</span>
+                            <span class="member-role">Rol a definir</span>
+                        </div>
+                        <div class="team-member-card">
+                            <span class="member-name">Agostina Cabrera</span>
+                            <span class="member-role">Rol a definir</span>
+                        </div>
+                        <div class="team-member-card">
+                            <span class="member-name">Camila Polanco</span>
+                            <span class="member-role">Rol a definir</span>
+                        </div>
+                        <div class="team-member-card">
+                            <span class="member-name">Sonia Godoy</span>
+                            <span class="member-role">Rol a definir</span>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </section>
 
@@ -74,15 +111,15 @@
                 <h2>Descripción del Proyecto y Objetivos</h2>
                 <div class="glass-card premium-card staggered-item">
                     <h3>¿De qué trata este prototipo?</h3>
-                    <p>Este proyecto consiste en un vehículo robótico equipado con una garra mecánica, diseñado para transportar objetos desde distintos puntos sin necesidad de intervención humana directa. Su propósito fundamental es asistir a personas con problemas lumbares, movilidad reducida o falta de extremidades, evitándoles el esfuerzo físico de agacharse. Para lograrlo, implementamos un chasis de cuatro ruedas lo suficientemente amplio y robusto como para sostener el brazo robótico sin perder el equilibrio. Se diseñó una garra ligera que permite operar con libertad y seguridad, siendo todo el sistema controlado remotamente a través de una aplicación móvil.</p>
+                    <p>Este proyecto consiste en un vehículo robótico equipado con una garra mecánica, diseñado para transportar objetos desde distintos puntos sin necesidad de intervención humana directa. Su propósito fundamental es asistir a personas con problemas lumbares, movilidad reducida o falta de extremidades, evitándoles el esfuerzo físico de agacharse.</p>
                     <h3 style="margin-top:20px;">Objetivos Principales</h3>
                     <ul class="sleek-list">
                         <li>1. Permitir a los usuarios recoger y desplazar objetos pequeños a distancia sin realizar esfuerzo físico.</li>
                         <li>2. Desarrollar un dispositivo que brinde una experiencia funcional y satisfactoria, siempre y cuando se utilice para el propósito adecuado.</li>
                         <li>3. Ofrecer un uso dinámico y seguro, apto para personas de casi todas las edades (recomendado para mayores de 3 años).</li>
                     </ul>
-                    <h3 style="margin-top:20px;">Funcionamiento Técnico del System</h3>
-                    <p>El circuito electrónico opera de manera coordinada gracias a sus tres pilares: el <strong>Arduino Uno</strong> actúa como el procesador central del vehículo, interpretando las señales y decidiendo cuándo activar las ruedas o la garra. El <strong>Módulo Puente H</strong> administra la distribución del voltaje, asegurando la potencia adecuada tanto para la placa como para la tracción. Finalmente, los <strong>motores DC</strong> proporcionan el desplazamiento del chasis, mientras que los <strong>servomotores</strong> brindan la articulación y precisión necesaria para los movimientos de la pinza.</p>
+                    <h3 style="margin-top:20px;">Funcionamiento Técnico del Sistema</h3>
+                    <p>El circuito electrónico opera de manera coordinada gracias a sus tres pilares: el <strong>Arduino Uno</strong> actúa como el procesador central del vehículo, interpretando las señales y decidiendo cuándo activar las ruedas o la garra. El <strong>Módulo Puente H</strong> administra la distribución del voltaje, asegurando la potencia adecuada. Finalmente, los <strong>motores DC</strong> y <strong>servomotores</strong> brindan el desplazamiento y la precisión necesaria.</p>
                 </div>
             </div>
         </section>
@@ -117,12 +154,54 @@
             </div>
         </section>
 
+        <section id="galeria" class="content-section">
+            <div class="container animate-on-scroll">
+                <div class="section-meta">03 / REGISTRO VISUAL</div>
+                <h2>Galería de Ensamblado</h2>
+                <p style="margin-bottom: 25px; font-size: 1.1rem;">Acá te mostramos el proceso constructivo del Robot 4W, desde las piezas sueltas hasta el prototipo final funcionando.</p>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-card">
+                        <img src="https://via.placeholder.com/400x300/1E293B/94A3B8?text=Foto+Impresi%C3%B3n+3D" alt="Paso 1" class="gallery-img">
+                        <div class="gallery-caption">
+                            <span class="step-badge">PASO 1</span>
+                            <p>Impresión 3D de las piezas del chasis y la garra.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-card">
+                        <img src="https://via.placeholder.com/400x300/1E293B/94A3B8?text=Foto+Motores+y+Llantas" alt="Paso 2" class="gallery-img">
+                        <div class="gallery-caption">
+                            <span class="step-badge">PASO 2</span>
+                            <p>Montaje de los 4 motores DC y las ruedas todoterreno.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <img src="https://via.placeholder.com/400x300/1E293B/94A3B8?text=Foto+Cableado+Arduino" alt="Paso 3" class="gallery-img">
+                        <div class="gallery-caption">
+                            <span class="step-badge">PASO 3</span>
+                            <p>Conexión del puente H y placa Arduino al sistema central.</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <img src="https://via.placeholder.com/400x300/1E293B/94A3B8?text=Foto+Robot+Terminado" alt="Paso 4" class="gallery-img">
+                        <div class="gallery-caption">
+                            <span class="step-badge">PASO 4</span>
+                            <p>Prototipo final ensamblado y listo para pruebas de tracción.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="gady" class="content-section">
             <div class="container animate-on-scroll">
-                <div class="section-meta">03 / GUÍA DEL USUARIO</div>
+                <div class="section-meta">04 / GUÍA DEL USUARIO</div>
                 <h2>Manual de Uso Oficial</h2>
                 <div class="glass-card premium-card gady-summary staggered-item">
-                    <div class="gady-badge">💻 PASO A PASO DEL SISTEMA</div>
+                    <div class="gady-badge pulse-slow">💻 PASO A PASO DEL SISTEMA</div>
                     <h3>Primer encendido y preparación:</h3>
                     <ul class="sleek-list">
                         <li>1. Inserte las baterías de 3V en el compartimento del portapilas.</li>
@@ -134,8 +213,8 @@
                     <h3 style="margin-top:20px;">Vinculación y Funcionalidad de la App:</h3>
                     <ul class="sleek-list">
                         <li>1. Al iniciar la aplicación por primera vez, el sistema desplegará un mensaje de bienvenida.</li>
-                        <li>2. En el menú principal, presione la opción "Conectar Robot". La app solicitará permisos de Bluetooth; al concederlos, buscará e identificará el dispositivo en su rango de alcance.</li>
-                        <li>3. Tras establecer exitosamente la conexión, ingresará al panel de control definitivo, donde tendrá a disposición los mandos de conducción y manipulación de la garra en tiempo real.</li>
+                        <li>2. En el menú principal, presione la opción "Conectar Robot". La app solicitará permisos de Bluetooth.</li>
+                        <li>3. Tras establecer la conexión, ingresará al panel de control definitivo para manejar la conducción y la garra.</li>
                     </ul>
                 </div>
             </div>
@@ -143,24 +222,23 @@
 
         <section id="desarrollo" class="content-section">
             <div class="container animate-on-scroll">
-                <div class="section-meta">04 / CRÓNICA DE DESARROLLO</div>
-                <h2>Evolución del Proyecto y Solución de Errores</h2>
+                <div class="section-meta">05 / CRÓNICA DE DESARROLLO</div>
+                <h2>Evolución y Solución de Errores</h2>
                 <div class="timeline">
                     <div class="timeline-step glass-card premium-card staggered-item">
-                        <div class="step-indicator">🛠️</div>
+                        <div class="step-indicator pulse-slow">🛠️</div>
                         <div class="step-content">
                             <h4>Del Concepto a la Realidad: Evolución del Diseño</h4>
-                            <p>En las fases iniciales, conceptualizamos un robot arácnido de seis patas con una pinza en el lomo. Sin embargo, al analizar las limitaciones de peso y volumen, uno de los integrantes propuso cambiar hacia un chasis de cuatro ruedas. Esta modificación aportó mayor estabilidad, apoyo y sencillez técnica. Además, al disponer previamente de las ruedas y la experiencia en impresión 3D, el desarrollo se agilizó drásticamente.</p>
-                            <p>Comenzamos modelando la garra, buscando una estructura con base firme y un agarre sólido. Posteriormente, diseñamos un chasis lo suficientemente amplio para soportar su peso. Inicialmente evaluamos usar un remolque trasero (tráiler) para llevar la pinza, pero las pruebas de física demostraron que, al levantar cargas pesadas, el robot volcaría y el proyecto fracasaría. Por ello, optamos por integrar la garra directamente sobre un chasis unificado y de mayor tamaño, asegurando un centro de gravedad bajo y estable.</p>
-                            <p>El mecanismo de sujeción también pasó por iteraciones. Pensamos en incorporar una mano humanoide o una pinza ancha de tres dedos, pero exigían demasiadas piezas y tiempo de ensamblaje. Finalmente, priorizamos la eficiencia y la ligereza, eligiendo un modelo de dos pinzas, estilizado y fácil de controlar, que cumple su función a la perfección sin sobrecargar los servomotores.</p>
+                            <p>En las fases iniciales, conceptualizamos un robot arácnido de seis patas con una pinza en el lomo. Sin embargo, al analizar las limitaciones de peso y volumen, optamos por cambiar hacia un chasis de cuatro ruedas. Esta modificación aportó mayor estabilidad, apoyo y sencillez técnica.</p>
+                            <p>Inicialmente evaluamos usar un remolque trasero (tráiler) para llevar la pinza, pero las pruebas de física demostraron que, al levantar cargas pesadas, el robot volcaría y el proyecto fracasaría. Por ello, optamos por integrar la garra directamente sobre un chasis unificado y estable.</p>
                         </div>
                     </div>
                     <div class="timeline-step glass-card premium-card staggered-item">
-                        <div class="step-indicator">⚠️</div>
+                        <div class="step-indicator pulse-slow">⚠️</div>
                         <div class="step-content">
                             <h4>Desafíos Superados y Lecciones Aprendidas</h4>
-                            <p>El principal obstáculo que enfrentamos fue la limitación de espacio. En nuestro primer boceto (la araña), el área era tan reducida que no permitía alojar correctamente el banco de baterías ni garantizaba el equilibrio de la estructura. Migrar a una plataforma plana de cuatro ruedas fue la decisión crítica que resolvió el manejo del peso y la distribución de la energía.</p>
-                            <p>Otro desafío fue optimizar los tiempos de producción. Descartar modelos de impresión 3D innecesariamente complejos (como la mano articulada de múltiples dedos) nos permitió enfocarnos en una garra rápida de imprimir y eficiente en el uso. Simplificar la mecánica fue clave para obtener un prototipo final robusto, funcional y libre de fallas estructurales al momento de operar la tracción y el levantamiento simultáneo.</p>
+                            <p>El principal obstáculo que enfrentamos fue la limitación de espacio. Migrar a una plataforma plana de cuatro ruedas fue la decisión crítica que resolvió el manejo del peso y la distribución de la energía.</p>
+                            <p>Descartar modelos de impresión 3D innecesariamente complejos nos permitió enfocarnos en una garra rápida de imprimir y eficiente. Simplificar la mecánica fue clave para obtener un prototipo final robusto, funcional y libre de fallas estructurales.</p>
                         </div>
                     </div>
                 </div>
@@ -169,12 +247,12 @@
 
         <section id="descargas" class="content-section">
             <div class="container animate-on-scroll">
-                <div class="section-meta">05 / APLICACIÓN MÓVIL</div>
+                <div class="section-meta">06 / APLICACIÓN MÓVIL</div>
                 <h2>Centro de Descargas</h2>
                 <div class="glass-card premium-card staggered-item" style="text-align: center;">
                     <h3>App de Control - Robot 4W</h3>
-                    <p style="max-width: 600px; margin: 0 auto; margin-bottom: 25px;">Obtené la aplicación oficial en formato APK para tu dispositivo Android. Con ella podrás vincular el robot vía Bluetooth y controlar todas las funciones de conducción y movimiento de la garra.</p>
-                    <div class="app-grid" style="align-items: center; background: rgba(0,0,0,0.1); padding: 20px; border-radius: 15px;">
+                    <p style="max-width: 600px; margin: 0 auto; margin-bottom: 25px;">Obtené la aplicación oficial en formato APK para tu dispositivo Android. Con ella podrás vincular el robot vía Bluetooth y controlar todas las funciones.</p>
+                    <div class="app-grid" style="align-items: center; background: rgba(0,0,0,0.1); padding: 20px; border-radius: 15px; border: 1px solid var(--border-color);">
                         <div>
                             <div style="font-size: 2.5rem; margin-bottom: 10px;">📱</div>
                             <p style="margin-bottom: 15px; font-weight: 800; color: var(--text-title);">¿Estás en tu celular?</p>
@@ -184,7 +262,7 @@
                             <div style="font-size: 2.5rem; margin-bottom: 10px;">💻</div>
                             <p style="margin-bottom: 15px; font-weight: 800; color: var(--text-title);">¿Estás en una PC?</p>
                             <div style="background: white; padding: 10px; display: inline-block; border-radius: 12px; box-shadow: var(--card-shadow);">
-                                <img id="qr-auto" src="" alt="Código QR de la App" style="display: block; width: 130px; height: 130px; opacity: 0.5;">
+                                <img id="qr-auto" src="" alt="Código QR de la App" style="display: block; width: 130px; height: 130px; opacity: 0.5; transition: opacity 0.5s;">
                             </div>
                         </div>
                     </div>
@@ -192,20 +270,6 @@
             </div>
         </section>
 
-        <section id="fuentes" class="content-section">
-            <div class="container animate-on-scroll">
-                <div class="section-meta">06 / BIBLIOGRAFÍA Y RECURSOS</div>
-                <h2>Plataformas y Fuentes de Diseño</h2>
-                <div class="glass-card premium-card staggered-item">
-                    <ul class="clean-list">
-                        <li>• <a href="https://www.tinkercad.com" target="_blank">Tinkercad.com</a> - Entorno digital para modelado y ensamble 3D.</li>
-                        <li>• <a href="https://Printables.com" target="_blank">Printables.com</a> - Repositorio de piezas mecánicas gratuitas.</li>
-                        <li>• <a href="https://Thingiverse.com" target="_blank">Thingiverse.com</a> - Biblioteca de archivos STL de código abierto.</li>
-                        <li>• <a href="https://Makerworld.com" target="_blank">Makerworld.com</a> - Modelos estructurales para impresión 3D.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
     </main>
 
     <div class="bottom-navigation">
