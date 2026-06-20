@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot 4W | Proyecto de Robótica Oficial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-dark">
+
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Cargando elementos y documentación...</p>
+        </div>
+    </div>
+
+    <div class="scroll-progress-bar" id="scroll-progress"></div>
+
+    <div class="aurora-container" id="aurora-bg">
+        <div class="aurora aurora-1"></div>
+        <div class="aurora aurora-2"></div>
+        <div class="aurora aurora-3"></div>
+    </div>
+
+    <div class="bubbles-container" id="bubbles">
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+    </div>
+
+    <div class="floating-controls">
+        <div class="theme-switchers">
+            <button class="control-btn theme-btn" data-theme="theme-light" title="Modo Claro">☀️</button>
+            <button class="control-btn theme-btn active" data-theme="theme-dark" title="Modo Oscuro">🌙</button>
+            <button class="control-btn theme-btn" data-theme="theme-frutiger" title="Modo Frutiger Aero">🐬</button>
+        </div>
+    </div>
+
+    <nav class="floating-nav init-hidden">
+        <div class="logo">ROBOT<span>4W</span></div>
+        <ul class="nav-links">
+            <li><a href="#introduccion">Introducción</a></li>
+            <li><a href="#materiales">Materiales</a></li>
+            <li><a href="#gady">Manual</a></li>
+            <li><a href="#desarrollo">Desarrollo</a></li>
+            <li><a href="#descargas">Descargas</a></li>
+            <li><a href="#fuentes">Fuentes</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="inicio" class="hero-section">
+            <div class="container hero-container init-hidden">
+                <div class="badge-container">
+                    <span class="badge glowing-border">PROYECTO DE ROBÓTICA • 4TO 1RA • 2026</span>
+                </div>
+                <h1 class="gradient-text">Robot con<br>Brazo Robótico</h1>
+                
+                <p class="subtitle">Desarrollo de un prototipo robótico móvil equipado con un brazo articulado. Su objetivo principal es facilitar el transporte y recolección de objetos a distancia sin requerir esfuerzo físico por parte del usuario.</p>
+                
+                <div class="hero-actions">
+                    <a href="#descargas" class="drive-btn hover-glow">Ir a Descargas</a>
+                </div>
+
+                <div class="team-card">
+                    <p style="font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px;">Jorquera Bautista • Romeu Eduardo • Briones Gadiel • Machado Axl • Condori Laila • Cabrera Agostina • Polanco Camila • Godoy Sonia</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="introduccion" class="content-section">
+            <div class="container animate-on-scroll">
+                <div class="section-meta">01 / DOCUMENTACIÓN</div>
+                <h2>Descripción del Proyecto y Objetivos</h2>
+                <div class="glass-card premium-card staggered-item">
+                    <h3>¿De qué trata este prototipo?</h3>
+                    <p>Este proyecto consiste en un vehículo robótico equipado con una garra mecánica, diseñado para transportar objetos desde distintos puntos sin necesidad de intervención humana directa. Su propósito fundamental es asistir a personas con problemas lumbares, movilidad reducida o falta de extremidades, evitándoles el esfuerzo físico de agacharse. Para lograrlo, implementamos un chasis de cuatro ruedas lo suficientemente amplio y robusto como para sostener el brazo robótico sin perder el equilibrio. Se diseñó una garra ligera que permite operar con libertad y seguridad, siendo todo el sistema controlado remotamente a través de una aplicación móvil.</p>
+                    
+                    <h3 style="margin-top:20px;">Objetivos Principales</h3>
+                    <p>Los siguientes lineamientos fueron definidos en conjunto, analizando cuidadosamente las capacidades del dispositivo y el perfil de los usuarios finales:</p>
+                    <ul class="sleek-list">
+                        <li>1. Permitir a los usuarios recoger y desplazar objetos pequeños a distancia sin realizar esfuerzo físico.</li>
+                        <li>2. Desarrollar un dispositivo que brinde una experiencia funcional y satisfactoria, siempre y cuando se utilice para el propósito adecuado.</li>
+                        <li>3. Ofrecer un uso dinámico y seguro, apto para personas de casi todas las edades (recomendado para mayores de 3 años).</li>
+                    </ul>
+
+                    <h3 style="margin-top:20px;">Funcionamiento Técnico del Sistema</h3>
+                    <p>El circuito electrónico opera de manera coordinada gracias a sus tres pilares: el <strong>Arduino Uno</strong> actúa como el procesador central del vehículo, interpretando las señales y decidiendo cuándo activar las ruedas o la garra. El <strong>Módulo Puente H</strong> administra la distribución del voltaje, asegurando la potencia adecuada tanto para la placa como para la tracción. Finalmente, los <strong>motores DC</strong> proporcionan el desplazamiento del chasis, mientras que los <strong>servomotores</strong> brindan la articulación y precisión necesaria para los movimientos de la pinza.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="materiales" class="content-section">
+            <div class="container animate-on-scroll">
+                <div class="section-meta">02 / COMPONENTES</div>
+                <h2>Materiales Utilizados</h2>
+                <div class="glass-card premium-card staggered-item">
+                    <div class="grid-two-cols">
+                        <div>
+                            <h4>Chasis y Tracción</h4>
+                            <ul class="clean-list">
+                                <li>- 4 Motores DC</li>
+                                <li>- Piezas de Impresión 3D</li>
+                                <li>- Filamento PLA</li>
+                                <li>- Set de Cables Dupont</li>
+                                <li>- 4 Ruedas todoterreno</li>
+                                <li>- Placa Arduino Uno</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Mecanismo de la Garra</h4>
+                            <ul class="clean-list">
+                                <li>- Servomotores (Articulación)</li>
+                                <li>- Piezas de Impresora 3D</li>
+                                <li>- Filamento estructural</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gady" class="content-section">
+            <div class="container animate-on-scroll">
+                <div class="section-meta">03 / GUÍA DEL USUARIO</div>
+                <h2>Manual de Uso Oficial</h2>
+                <div class="glass-card premium-card gady-summary staggered-item">
+                    <div class="gady-badge">💻 PASO A PASO DEL SISTEMA</div>
+                    
+                    <h3>Primer encendido y preparación:</h3>
+                    <ul class="sleek-list">
+                        <li>1. Inserte las baterías de 3V en el compartimento del portapilas.</li>
+                        <li>2. Conecte el robot a la corriente y respete el tiempo de carga indicado (3 a 4 horas).</li>
+                        <li>3. Encienda el dispositivo activando la perilla lateral de alimentación.</li>
+                        <li>4. Utilice su dispositivo móvil para instalar la aplicación de control.</li>
+                        <li>5. Una vez instalada, abra la aplicación y siga las instrucciones en pantalla.</li>
+                    </ul>
+
+                    <h3 style="margin-top:20px;">Vinculación y Funcionalidad de la App:</h3>
+                    <ul class="sleek-list">
+                        <li>1. Al iniciar la aplicación por primera vez, el sistema desplegará un mensaje de bienvenida.</li>
+                        <li>2. En el menú principal, presione la opción "Conectar Robot". La app solicitará permisos de Bluetooth; al concederlos, buscará e identificará el dispositivo en su rango de alcance.</li>
+                        <li>3. Tras establecer exitosamente la conexión, ingresará al panel de control definitivo, donde tendrá a disposición los mandos de conducción y manipulación de la garra en tiempo real.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="desarrollo" class="content-section">
+            <div class="container animate-on-scroll">
+                <div class="section-meta">04 / CRÓNICA DE DESARROLLO</div>
+                <h2>Evolución del Proyecto y Solución de Errores</h2>
+                
+                <div class="timeline">
+                    <div class="timeline-step glass-card premium-card staggered-item">
+                        <div class="step-indicator">🛠️</div>
+                        <div class="step-content">
+                            <h4>Del Concepto a la Realidad: Evolución del Diseño</h4>
+                            <p>En las fases iniciales, conceptualizamos un robot arácnido de seis patas con una pinza en el lomo. Sin embargo, al analizar las limitaciones de peso y volumen, uno de los integrantes propuso cambiar hacia un chasis de cuatro ruedas. Esta modificación aportó mayor estabilidad, apoyo y sencillez técnica. Además, al disponer previamente de las ruedas y la experiencia en impresión 3D, el desarrollo se agilizó drásticamente.</p>
+                            <p>Comenzamos modelando la garra, buscando una estructura con base firme y un agarre sólido. Posteriormente, diseñamos un chasis lo suficientemente amplio para soportar su peso. Inicialmente evaluamos usar un remolque trasero (tráiler) para llevar la pinza, pero las pruebas de física demostraron que, al levantar cargas pesadas, el robot volcaría y el proyecto fracasaría. Por ello, optamos por integrar la garra directamente sobre un chasis unificado y de mayor tamaño, asegurando un centro de gravedad bajo y estable.</p>
+                            <p>El mecanismo de sujeción también pasó por iteraciones. Pensamos en incorporar una mano humanoide o una pinza ancha de tres dedos, pero exigían demasiadas piezas y tiempo de ensamblaje. Finalmente, priorizamos la eficiencia y la ligereza, eligiendo un modelo de dos pinzas, estilizado y fácil de controlar, que cumple su función a la perfección sin sobrecargar los servomotores.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-step glass-card premium-card staggered-item">
+                        <div class="step-indicator">⚠️</div>
+                        <div class="step-content">
+                            <h4>Desafíos Superados y Lecciones Aprendidas</h4>
+                            <p>El principal obstáculo que enfrentamos fue la limitación de espacio. En nuestro primer boceto (la araña), el área era tan reducida que no permitía alojar correctamente el banco de baterías ni garantizaba el equilibrio de la estructura. Migrar a una plataforma plana de cuatro ruedas fue la decisión crítica que resolvió el manejo del peso y la distribución de la energía.</p>
+                            <p>Otro desafío fue optimizar los tiempos de producción. Descartar modelos de impresión 3D innecesariamente complejos (como la mano articulada de múltiples dedos) nos permitió enfocarnos en una garra rápida de imprimir y eficiente en el uso. Simplificar la mecánica fue clave para obtener un prototipo final robusto, funcional y libre de fallas estructurales al momento de operar la tracción y el levantamiento simultáneo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="descargas" class="content-section">
+            <div class="container animate-on-scroll">
+                <div class="section-meta">05 / APLICACIÓN MÓVIL</div>
+                <h2>Centro de Descargas</h2>
+                <div class="glass-card premium-card staggered-item" style="text-align: center;">
+                    <h3>App de Control - Robot 4W</h3>
+                    <p style="max-width: 600px; margin: 0 auto; margin-bottom: 25px;">Obtené la aplicación oficial en formato APK para tu dispositivo Android. Con ella podrás vincular el robot vía Bluetooth y controlar todas las funciones de conducción y movimiento de la garra.</p>
+                    
+                    <div class="app-grid" style="align-items: center; margin-top: 30px; gap: 40px; background: rgba(0,0,0,0.1); padding: 20px; border-radius: 15px;">
+                        
+                        <div style="padding: 20px; border-right: 1px solid var(--border-color);">
+                            <div style="font-size: 2.5rem; margin-bottom: 10px;">📱</div>
+                            <p style="margin-bottom: 15px; font-weight: 800; color: var(--text-title);">¿Estás en tu celular?</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 20px;">Instalá el archivo directamente haciendo clic abajo.</p>
+                            <a href="descarga.html" target="_blank" class="drive-btn hover-glow">Descargar APK</a>
+                        </div>
+
+                        <div style="padding: 20px;">
+                            <div style="font-size: 2.5rem; margin-bottom: 10px;">💻</div>
+                            <p style="margin-bottom: 15px; font-weight: 800; color: var(--text-title);">¿Estás en una PC?</p>
+                            <p style="font-size: 0.85rem; margin-bottom: 15px;">Escaneá este código para abrir la página de descarga en tu celu.</p>
+                            
+                            <div style="background: white; padding: 10px; display: inline-block; border-radius: 12px; box-shadow: var(--card-shadow);">
+                                <img id="qr-auto" src="" alt="Código QR de la App" style="display: block; width: 130px; height: 130px; opacity: 0.5;">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="fuentes" class="content-section">
+            <div class="container animate-on-scroll">
+                <div class="section-meta">06 / BIBLIOGRAFÍA Y RECURSOS</div>
+                <h2>Plataformas y Fuentes de Diseño</h2>
+                <div class="glass-card premium-card staggered-item">
+                    <ul class="clean-list">
+                        <li>• <a href="https://www.tinkercad.com" target="_blank">Tinkercad.com</a> - Entorno digital para modelado y ensamble 3D.</li>
+                        <li>• <a href="https://Printables.com" target="_blank">Printables.com</a> - Repositorio de piezas mecánicas gratuitas.</li>
+                        <li>• <a href="https://Thingiverse.com" target="_blank">Thingiverse.com</a> - Biblioteca de archivos STL de código abierto.</li>
+                        <li>• <a href="https://Makerworld.com" target="_blank">Makerworld.com</a> - Modelos estructurales para impresión 3D.</li>
+                    </ul>
+                    <p style="margin-top: 15px;">La etapa de diseño mecánico consistió en buscar componentes estructurales y robóticos en los repositorios mencionados. Una vez seleccionadas las piezas óptimas para el chasis y la garra, se importaron al software Tinkercad para organizarlas, ajustarlas y prepararlas meticulosamente antes de proceder con la impresión 3D física.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="bottom-navigation">
+        <button id="back-to-top" class="action-btn">▲ Volver al Inicio</button>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Robot 4W Project. Documentación de Robótica - 4to 1ra.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Esto lee automáticamente el link de la página donde estés y arma la URL del archivo descarga.html
+            let currentPath = window.location.href.split('#')[0];
+            // Le sacamos index.html si es que lo tiene al final
+            if(currentPath.endsWith('index.html')) {
+                currentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+            } else if (!currentPath.endsWith('/')) {
+                currentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+            }
+            
+            // Creamos el link exacto hacia la pestaña "Gracias por descargar"
+            let downloadLink = currentPath + '/descarga.html';
+            
+            // Si el link actual no empieza con file (o sea, si ya está subido a internet)
+            if(!window.location.href.startsWith("file:///")) {
+                let imgQr = document.getElementById('qr-auto');
+                imgQr.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(downloadLink);
+                imgQr.style.opacity = "1";
+            } else {
+                // Mensaje en consola por si probás en la compu
+                console.log("El QR se activará automáticamente cuando subas la página a internet.");
+            }
+        });
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+</html>
