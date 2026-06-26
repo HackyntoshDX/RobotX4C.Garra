@@ -2,12 +2,176 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus G | Proyecto Oficial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Robot Móvil con Garra Mecánica | Proyecto Oficial</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"></script>
+    
+    <style>
+        /* Parches críticos para vista móvil y Android sin tocar tus clases globales */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+        
+        .team-grid-modern, .grid-two-cols, .gallery-grid {
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+
+        /* Corrección ALINEADA para la barra de navegación en celulares Android/iOS */
+        @media (max-width: 768px) {
+            .floating-nav {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                padding: 10px !important;
+                width: 92% !important;
+                left: 4% !important;
+                transform: none !important; 
+                box-sizing: border-box !important;
+            }
+            
+            .nav-links {
+                display: flex !important;
+                width: 100% !important;
+                overflow-x: auto !important;
+                white-space: nowrap !important;
+                justify-content: flex-start !important;
+                align-items: center !important;
+                padding: 10px 0 !important; 
+                margin: 5px 0 0 0 !important; 
+                gap: 15px !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; 
+            }
+            
+            .nav-links::-webkit-scrollbar { display: none; }
+            .nav-links li { display: inline-block !important; }
+
+            .container, .hero-container, .glass-card {
+                padding: 15px !important;
+                width: 100% !important;
+                max-width: 100vw !important;
+                box-sizing: border-box !important;
+            }
+            
+            h1 { font-size: 2rem !important; }
+        }
+
+        /* Estilos del Módulo del Visor 3D */
+        .viewer-3d-container {
+            margin-top: 30px;
+            width: 100%;
+        }
+        .selector-3d {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .btn-3d {
+            background: rgba(255,255,255,0.1);
+            color: inherit;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .btn-3d.active {
+            background: #3b82f6;
+            border-color: #60a5fa;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        model-viewer {
+            width: 100%;
+            height: 400px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .download-3d-container {
+            margin-top: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Estilos del Módulo de la IA */
+        .ai-chat-card {
+            margin-top: 30px;
+            border-color: rgba(168, 85, 247, 0.4) !important;
+            background: linear-gradient(145deg, rgba(20,20,30,0.8), rgba(30,20,40,0.8));
+        }
+        .chat-box {
+            height: 250px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .chat-msg {
+            padding: 10px 14px;
+            border-radius: 8px;
+            max-width: 85%;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+        .chat-msg.user {
+            background: #3b82f6;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+        .chat-msg.ai {
+            background: rgba(168, 85, 247, 0.2);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #f3e8ff;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+        .chat-input-container { display: flex; gap: 10px; }
+        .chat-input {
+            flex: 1;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+        }
+        .chat-input:focus {
+            outline: none;
+            border-color: #a855f7;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+        }
+        .chat-send-btn {
+            background: #a855f7;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .chat-send-btn:hover { background: #9333ea; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
 </head>
 <body class="theme-dark">
 
@@ -31,7 +195,7 @@
             <button class="control-btn theme-btn" data-theme="theme-light" title="Modo Claro">☀️</button>
             <button class="control-btn theme-btn active" data-theme="theme-dark" title="Modo Oscuro">🌙</button>
             <button class="control-btn theme-btn" data-theme="theme-frutiger" title="Modo Frutiger Aero">🐬</button>
-            <button class="control-btn" id="access-toggle" title="Modo Accesibilidad (Alto Contraste)" style="margin-left: 6px; background: rgba(255,255,255,0.15);">👁️</button>
+            <button class="control-btn" id="access-toggle" title="Modo Accesibilidad" style="margin-left: 6px; background: rgba(255,255,255,0.15);">👁️</button>
         </div>
     </div>
 
@@ -41,10 +205,9 @@
             <li><a href="#introduccion">Proyecto</a></li>
             <li><a href="#materiales">Materiales</a></li>
             <li><a href="#galeria">Armado</a></li>
-            <li><a href="#visor-3d">Modelo 3D</a></li>
             <li><a href="#manual">Manual de Uso</a></li>
             <li><a href="#desarrollo">Desarrollo</a></li>
-            <li><a href="#faq">Diagnóstico</a></li>
+            <li><a href="#faq">Diagnóstico & IA</a></li>
             <li><a href="#descargas">Descargas</a></li>
         </ul>
     </nav>
@@ -55,8 +218,8 @@
                 <div class="badge-container">
                     <span class="badge glowing-border pulse-slow">PROYECTO DE ROBÓTICA • 4TO 1RA • AÑO 2026</span>
                 </div>
-                <h1 class="gradient-text">Nexus G<br>Robot Inteligente con Garra</h1>
-                <p class="subtitle">En este proyecto realizamos un prototipo basado en un robot con un brazo robótico implementado. El objetivo principal de este vehículo es llevar y traer objetos sin necesidad de que uno se tenga que mover de su lugar.</p>
+                <h1 class="gradient-text">Robot Móvil con<br>Garra Mecánica</h1>
+                <p class="subtitle">Desarrollamos un prototipo funcional de vehículo a tracción equipado con un brazo robótico. Su misión es transportar y recolectar objetos a distancia para asistir a personas con movilidad reducida.</p>
                 <div class="hero-actions">
                     <a href="#descargas" class="drive-btn hover-glow">Ir a Descargas</a>
                 </div>
@@ -64,14 +227,14 @@
                 <div class="team-container mt-4 animate-on-scroll">
                     <h3 class="team-title">Integrantes del Equipo</h3>
                     <div class="team-grid-modern">
-                        <div class="team-member-card"><span class="member-name">Bautista Jorquera</span><span class="member-role">Rol A Definir</span></div>
-                        <div class="team-member-card"><span class="member-name">Eduardo Romeu</span><span class="member-role">Rol A Definir</span></div>
-                        <div class="team-member-card"><span class="member-name">Gadiel Briones</span><span class="member-role">Rol A Definir</span></div>
-                        <div class="team-member-card"><span class="member-name">Axl Machado</span><span class="member-role">Rol A Definir</span></div>
-                        <div class="team-member-card"><span class="member-name">Laila Condori</span><span class="member-role">Rol A Definir</span></div>
-                        <div class="team-member-card"><span class="member-name">Agostina Cabrera</span><span class="member-role">Rol A Definir</span></div>
-                        <div class="team-member-card"><span class="member-name">Camila Polanco</span><span class="member-role">Rol A Definir</span></div>
-                        <div class="team-member-card"><span class="member-name">Sonia Godoy</span><span class="member-role">Rol A Definir</span></div>
+                        <div class="team-member-card"><span class="member-name">Jorquera Bautista</span><span class="member-role">Desarrollador</span></div>
+                        <div class="team-member-card"><span class="member-name">Romeu Eduardo</span><span class="member-role">Desarrollador</span></div>
+                        <div class="team-member-card"><span class="member-name">Briones Gadiel</span><span class="member-role">Desarrollador</span></div>
+                        <div class="team-member-card"><span class="member-name">Machado Axl</span><span class="member-role">Desarrollador</span></div>
+                        <div class="team-member-card"><span class="member-name">Condori Laila</span><span class="member-role">Desarrolladora</span></div>
+                        <div class="team-member-card"><span class="member-name">Cabrera Agostina</span><span class="member-role">Desarrolladora</span></div>
+                        <div class="team-member-card"><span class="member-name">Polanco Camila</span><span class="member-role">Desarrolladora</span></div>
+                        <div class="team-member-card"><span class="member-name">Godoy Sonia</span><span class="member-role">Desarrolladora</span></div>
                     </div>
                 </div>
             </div>
@@ -82,13 +245,14 @@
                 <div class="section-meta">01 / DOCUMENTACIÓN</div>
                 <h2>¿De qué trata el proyecto?</h2>
                 <div class="glass-card premium-card">
-                    <p>El proyecto es un vehículo a control remoto que construimos desde cero. Tiene tracción en sus cuatro ruedas y una garra mecánica instalada en la parte de arriba. Toda la idea surgió para poder resolver un problema simple: transportar objetos pequeños a distancia de forma fácil y entretenida.</p>
+                    <p>Este proyecto consiste en un robot móvil de cuatro ruedas que incorpora una garra mecánica en la parte superior (lomo). Su objetivo principal es resolver un problema cotidiano: <strong>llevar y traer objetos desde distintos lugares sin necesidad de movimiento humano</strong>. Esto resulta ideal para evitar el cansancio, asistir a personas con falta de movilidad o que no poseen ciertas extremidades.</p>
+                    <p>La estructura fue diseñada con el tamaño y peso necesarios para no perder el equilibrio y mantener la estabilidad al manipular cargas, mientras que la garra se diseñó lo más liviana posible para moverse con total libertad y ser operada enteramente mediante una aplicación móvil.</p>
                     
                     <h3 style="margin-top:25px; font-weight:800; font-size:1.2rem;">Nuestros Objetivos</h3>
                     <ul class="sleek-list">
-                        <li>1. Crear un robot funcional que permita recoger, trasladar y soltar objetos desde un lugar a otro.</li>
-                        <li>2. Evitar que la persona tenga que moverse físicamente para alcanzar cosas que están lejos.</li>
-                        <li>3. Trabajar en equipo para integrar la impresión 3D, el armado electrónico y la programación de una aplicación en un solo proyecto.</li>
+                        <li>1. Permitir a las personas recoger y trasladar objetos pequeños a distancia.</li>
+                        <li>2. Ofrecer un dispositivo que aporte diversión, didáctica y satisfacción funcional.</li>
+                        <li>3. Asegurar experiencias dinámicas y memorables para todas las edades (apto para usuarios de 3 a 99 años).</li>
                     </ul>
                 </div>
             </div>
@@ -96,29 +260,27 @@
 
         <section id="materiales" class="content-section">
             <div class="container animate-on-scroll">
-                <div class="section-meta">02 / COMPONENTES</div>
-                <h2>Materiales y Aplicaciones Utilizadas</h2>
+                <div class="section-meta">02 / COMPONENTES TÉCNICOS</div>
+                <h2>Hardware y Funcionamiento</h2>
                 <div class="glass-card premium-card">
-                    <p style="margin-bottom: 25px;">Para construir el robot utilizamos distintos componentes electrónicos y materiales que fuimos consiguiendo e imprimiendo en el grupo.</p>
+                    <p style="margin-bottom: 25px;">Para construir el prototipo integramos múltiples piezas impresas en 3D con componentes de electrónica programable.</p>
                     
                     <div class="grid-two-cols">
                         <div>
-                            <h4 style="font-weight: 800; margin-bottom: 15px;">Hardware y Materiales</h4>
+                            <h4 style="font-weight: 800; margin-bottom: 15px;">Módulo Electrónico</h4>
                             <ul class="clean-list">
-                                <li>• Placa Arduino (El cerebro del robot)</li>
-                                <li>• 4 Motores (Para que las ruedas giren)</li>
-                                <li>• Servomotores (Para darle movimiento a la garra)</li>
-                                <li>• Cables Dupont (Para conectar todo)</li>
-                                <li>• Ruedas</li>
-                                <li>• Impresora 3D y Filamento plástico</li>
-                                <li>• Pilas de 3V y Portapilas</li>
+                                <li>• <strong>Arduino Uno:</strong> El cerebro del robot. Procesa y maneja la activación de los motores y la garra.</li>
+                                <li>• <strong>Puente H:</strong> Administra el voltaje que entra al sistema y gestiona el movimiento de tracción.</li>
+                                <li>• <strong>4 Motores DC y Ruedas:</strong> Permiten el desplazamiento del vehículo.</li>
+                                <li>• <strong>Servomotores:</strong> Brindan el empuje y control de apertura a la garra.</li>
+                                <li>• <strong>Cables Dupont, Pilas 3V y Portapilas.</strong></li>
                             </ul>
                         </div>
                         <div>
-                            <h4 style="font-weight: 800; margin-bottom: 15px;">Software y Páginas Web</h4>
-                            <p style="font-size: 0.9rem; margin-bottom: 15px; opacity:0.8;">Usamos estas páginas para buscar los diseños 3D y acomodar las piezas antes de imprimirlas:</p>
+                            <h4 style="font-weight: 800; margin-bottom: 15px;">Modelado y Estructura</h4>
+                            <p style="font-size: 0.9rem; margin-bottom: 15px; opacity:0.8;">Utilizamos impresoras 3D con filamento plástico. Los diseños fueron investigados, acomodados y ordenados mediante las siguientes plataformas gratuitas:</p>
                             <ul class="clean-list">
-                                <li>• <strong>Tinkercad:</strong> Para importar, acomodar y organizar las piezas.</li>
+                                <li>• <strong>Tinkercad</strong> (Modelado y organización)</li>
                                 <li>• <strong>Printables.com</strong></li>
                                 <li>• <strong>Thingiverse.com</strong></li>
                                 <li>• <strong>Makerworld.com</strong></li>
@@ -129,80 +291,26 @@
             </div>
         </section>
 
-        <section id="galeria" class="content-section">
+        <section id="visor3d" class="content-section">
             <div class="container animate-on-scroll">
-                <div class="section-meta">03 / PROCESO</div>
-                <h2>Paso a paso del armado</h2>
-                <p style="margin-bottom: 30px;">Así fue como fuimos ensamblando el robot a lo largo de las juntadas.</p>
-                
-                <div class="gallery-grid">
-                    <div class="gallery-card">
-                        <img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?w=800&q=80" alt="Búsqueda de diseños" class="gallery-img" loading="lazy">
-                        <div class="gallery-caption">
-                            <span class="step-badge">PASO 1</span>
-                            <p><strong>Búsqueda y Diseño:</strong> Buscamos distintos modelos en las páginas de diseño (Thingiverse, Makerworld) tanto para el auto como para el brazo robótico. Luego los importamos a Tinkercad para acomodarlos ordenadamente.</p>
-                        </div>
-                    </div>
-                    <div class="gallery-card">
-                        <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?w=800&q=80" alt="Impresión 3D" class="gallery-img" loading="lazy">
-                        <div class="gallery-caption">
-                            <span class="step-badge">PASO 2</span>
-                            <p><strong>Impresión 3D:</strong> Aprovechamos que un compañero del grupo ya tenía una impresora 3D y empezamos a imprimir las piezas del chasis y la garra utilizando filamento.</p>
-                        </div>
-                    </div>
-                    <div class="gallery-card">
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Cables y Motores" class="gallery-img" loading="lazy">
-                        <div class="gallery-caption">
-                            <span class="step-badge">PASO 3</span>
-                            <p><strong>Electrónica:</strong> Colocamos los 4 motores, la placa Arduino y el módulo Bluetooth. Conectamos todo utilizando los cables Dupont y probamos que recibiera energía de las pilas.</p>
-                        </div>
-                    </div>
-                    <div class="gallery-card">
-                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80" alt="Montaje final" class="gallery-img" loading="lazy">
-                        <div class="gallery-caption">
-                            <span class="step-badge">PASO 4</span>
-                            <p><strong>Montaje de la Garra:</strong> Por último, aseguramos la garra mecánica sobre el lomo del auto. Hicimos las pruebas finales con la aplicación para verificar que todo se moviera correctamente.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="visor-3d" class="content-section">
-            <div class="container animate-on-scroll">
-                <div class="section-meta">3.5 / MODELADO VIRTUAL</div>
-                <h2>Explorá la Garra en 3D</h2>
-                <p style="margin-bottom: 25px;">Hacé clic, arrastrá y usá la rueda del mouse para examinar la estructura tridimensional de la pinza que utilizamos en nuestro chasis final.</p>
-                
-                <div class="glass-card premium-card" style="padding: 10px; display: flex; justify-content: center; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); overflow: hidden; border-radius: 16px;">
-                    <iframe src="https://www.tinkercad.com/things/aApd5EKTruU-diseno-tryhard-676767" width="100%" height="450" frameborder="0" style="border-radius: 12px; min-height: 400px; width: 100%; border: none; background: transparent;" allowfullscreen></iframe>
-                </div>
-            </div>
-        </section>
-
-        <section id="manual" class="content-section">
-            <div class="container animate-on-scroll">
-                <div class="section-meta">04 / INSTRUCCIONES</div>
-                <h2>Manual de Uso</h2>
-                <div class="glass-card premium-card gady-summary">
-                    <div class="gady-badge">💻 PASO A PASO DEL USO</div>
+                <div class="section-meta">MODELADO / DISEÑOS ORIGINALES</div>
+                <h2>Visor de Modelos 3D del Equipo</h2>
+                <div class="glass-card premium-card">
+                    <p>Interactuá con las piezas del robot. Cambiá de archivo con los botones y descargá el correspondiente para imprimir.</p>
                     
-                    <h3 style="margin-top:15px; font-weight:800;">Primer encendido:</h3>
-                    <ul class="sleek-list">
-                        <li>1. Coloque las pilas de 3V dentro del portapilas.</li>
-                        <li>2. Coloque a cargar el Robot las horas indicadas en el manual (3 a 4 hs).</li>
-                        <li>3. Encienda el robot desde la perilla lateral.</li>
-                        <li>4. En su celular, escanee el código QR mostrado en la caja; esto lo llevará a la web para descargar e instalar nuestra app.</li>
-                        <li>5. Una vez instalada la app, siga las instrucciones a continuación.</li>
-                    </ul>
-                    
-                    <h3 style="margin-top:25px; font-weight:800;">Funcionalidad de la app:</h3>
-                    <ul class="sleek-list">
-                        <li>1. Al ingresar a la app por primera vez, le aparecerá un cartel dando la bienvenida al sistema.</li>
-                        <li>2. En el menú principal, deberá darle a <strong>"Conectar Robot"</strong>. En eso, la aplicación le pedirá acceso al Bluetooth.</li>
-                        <li>3. Al concederle el permiso, la app podrá encontrar el robot en su listado para vincularse.</li>
-                        <li>4. Una vez conectado, podrá usar los controles en pantalla para manejar las ruedas y abrir o cerrar la garra.</li>
-                    </ul>
+                    <div class="viewer-3d-container">
+                        <div class="selector-3d">
+                            <button class="btn-3d active" onclick="switchModel('garra.glb')">Garra Robótica</button>
+                            <button class="btn-3d" onclick="switchModel('chasis.glb')">Chasis del Auto</button>
+                            <button class="btn-3d" onclick="switchModel('rueda.glb')">Rueda 3D</button>
+                        </div>
+                        
+                        <model-viewer id="robotViewer" src="garra.glb" camera-controls auto-rotate shadow-intensity="1"></model-viewer>
+                        
+                        <div class="download-3d-container">
+                            <a id="downloadModelLink" href="garra.glb" download class="app-btn" style="text-decoration:none; text-align:center;">Descargar Pieza Seleccionada</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -210,104 +318,92 @@
         <section id="desarrollo" class="content-section">
             <div class="container animate-on-scroll">
                 <div class="section-meta">05 / BITÁCORA DE TRABAJO</div>
-                <h2>¿Cómo fuimos trabajando?</h2>
-                <p style="margin-bottom: 30px;">A medida que avanzábamos con el proyecto, nos dimos cuenta de que algunas de nuestras primeras ideas no iban a funcionar, así que fuimos cambiando los diseños para mejorar.</p>
+                <h2>Evolución y Resolución de Errores</h2>
+                <p style="margin-bottom: 30px;">A medida que avanzábamos con el proyecto, enfrentamos problemas estructurales y de peso que nos obligaron a rediseñar nuestras ideas iniciales.</p>
                 
                 <div class="vertical-timeline">
                     <div class="timeline-item">
                         <div class="timeline-dot">❌</div>
                         <div class="timeline-card glass-card premium-card">
-                            <span class="timeline-date">Idea original descartada</span>
-                            <h4>Robot Arácnido (6 patas)</h4>
-                            <p>Al principio pensamos en hacer un robot arácnido con seis patas y la garra en el lomo. Sin embargo, un compañero del grupo dio la idea de cambiar la araña por un auto, ya que él tenía ruedas y experiencia en hacer cosas de ese estilo, lo que nos agregó estabilidad, apoyo y sencillez para agilizar todo.</p>
+                            <span class="timeline-date">Fase 1: La idea Arácnida</span>
+                            <h4>Robot de 6 patas descartado</h4>
+                            <p>Originalmente queríamos hacer un robot arácnido con la garra arriba. Sin embargo, el espacio interno era demasiado diminuto (no beneficiaba la instalación de las pilas) y la estructura era inestable. Decidimos migrar a un auto para ganar estabilidad y espacio.</p>
                         </div>
                     </div>
 
                     <div class="timeline-item">
                         <div class="timeline-dot">❌</div>
                         <div class="timeline-card glass-card premium-card">
-                            <span class="timeline-date">Segunda idea descartada</span>
-                            <h4>Auto con Tráiler para la Garra</h4>
-                            <p>En un momento pensamos que podíamos agregarle un tráiler para llevar la garra detrás del auto. Pero nos dimos cuenta de que, si la garra llegaba a sostener algo un poco pesado, se caería hacia atrás y el proyecto sería un fracaso.</p>
+                            <span class="timeline-date">Fase 2: El Remolque</span>
+                            <h4>Auto con Tráiler descartado</h4>
+                            <p>Pensamos en agregarle un tráiler detrás del auto para llevar la garra. Rápidamente nos dimos cuenta de que si la garra levantaba un objeto pesado, el tráiler se volcaría hacia atrás, convirtiendo el proyecto en un fracaso.</p>
                         </div>
                     </div>
 
                     <div class="timeline-item">
                         <div class="timeline-dot" style="background: #22c55e; border-color: #4ade80;">✔️</div>
                         <div class="timeline-card glass-card premium-card" style="border-color: rgba(74, 222, 128, 0.4);">
-                            <span class="timeline-date" style="color: #4ade80;">Diseño Final Elegido</span>
-                            <h4>Auto grande de base espaciosa</h4>
-                            <p>Finalmente elegimos usar un auto más grande, con una base espaciosa para soportar la garra directamente sobre el lomo. De esta forma nos aseguramos de que no se caiga fácilmente al agarrar objetos pesados, sumándole estabilidad a todo el conjunto.</p>
+                            <span class="timeline-date" style="color: #4ade80;">Fase 3: Diseño Final</span>
+                            <h4>Chasis Extendido</h4>
+                            <p>Elegimos fabricar un auto de base mucho más espaciosa y robusta. Esto nos permitió soportar la garra directamente sobre el lomo, otorgando el peso y la estabilidad central necesarios para manipular cargas sin problemas de vuelco.</p>
                         </div>
                     </div>
 
                     <div class="timeline-item">
                         <div class="timeline-dot">🛠️</div>
                         <div class="timeline-card glass-card premium-card">
-                            <span class="timeline-date">Evolución de la pieza principal</span>
-                            <h4>El diseño de la Garra Robótica</h4>
-                            <p>Primero pensamos en hacer una <strong>mano humanoide</strong> para que el proyecto fuera más llamativo, pero al descargar los archivos vimos que eran demasiadas piezas y era muy difícil de hacer. Luego pasamos a una <strong>garra azul un poco ancha con tres pinzas</strong>. Finalmente, encontramos un <strong>diseño más ligero y "flaco" con dos pinzas</strong>, que nos dio muchísimo más control, estabilidad y mejor agarre para cumplir su función.</p>
+                            <span class="timeline-date">Optimización de Piezas</span>
+                            <h4>La evolución de la Garra</h4>
+                            <p>Pasamos por varios diseños: primero quisimos hacer una <strong>mano humanoide</strong> (descartada por tener demasiadas piezas y complejidad extrema). Luego probamos una <strong>garra azul ancha de tres pinzas</strong>. Finalmente, gracias a sugerencias de mejora, nos quedamos con una <strong>garra ligera y "flaca" de dos pinzas</strong> que nos garantizó un agarre más efectivo y preciso.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <section id="manual" class="content-section">
+            <div class="container animate-on-scroll">
+                <div class="section-meta">04 / INSTRUCCIONES DE OPERACIÓN</div>
+                <h2>Manual de Uso</h2>
+                <div class="glass-card premium-card gady-summary">
+                    <div class="gady-badge">💻 PASO A PASO DEL SISTEMA</div>
+                    
+                    <h3 style="margin-top:15px; font-weight:800;">Primer encendido:</h3>
+                    <ul class="sleek-list">
+                        <li>1. Coloque las pilas de 3V dentro del portapilas de la base.</li>
+                        <li>2. Deje cargando el dispositivo el tiempo indicado (entre 3 a 4 horas).</li>
+                        <li>3. Encienda el robot moviendo la perilla lateral al modo ON.</li>
+                        <li>4. Escanee con su celular el Código QR que se encuentra en la caja; será redirigido a la página de descarga de nuestra aplicación oficial.</li>
+                    </ul>
+                    
+                    <h3 style="margin-top:25px; font-weight:800;">Conexión de la Aplicación:</h3>
+                    <ul class="sleek-list">
+                        <li>1. Abra la aplicación y observe el mensaje de bienvenida al sistema.</li>
+                        <li>2. Presione el botón <strong>"Conectar Robot"</strong> y conceda el permiso de acceso al Bluetooth cuando el sistema Android se lo solicite.</li>
+                        <li>3. Seleccione el módulo Bluetooth del robot en la lista de dispositivos encontrados.</li>
+                        <li>4. Acceda al menú principal para visualizar los controles virtuales y manejar todas las funciones operativas del vehículo.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <section id="faq" class="content-section">
             <div class="container animate-on-scroll">
-                <div class="section-meta">06 / DIAGNÓSTICO</div>
-                <h2>Problemas comunes (FAQ)</h2>
-                <p style="margin-bottom: 25px;">Si algo falla, presioná sobre la pregunta para ver cómo solucionarlo rápido.</p>
+                <div class="section-meta">06 / SOPORTE TÉCNICO</div>
+                <h2>Diagnóstico & Inteligencia Artificial</h2>
                 
-                <div class="accordion-container">
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <span>¿Por qué la App me pide activar la Ubicación?</span>
-                            <span class="accordion-icon">+</span>
-                        </button>
-                        <div class="accordion-content">
-                            <p>No te preocupes, la aplicación no rastrea tu GPS. Los celulares Android piden que actives la Ubicación sí o sí para poder usar el escáner de Bluetooth y encontrar la placa del robot. Solo dale a "Permitir".</p>
-                        </div>
+                <div class="glass-card premium-card ai-chat-card">
+                    <h3 style="font-weight: 800; display: flex; align-items: center; gap: 10px; color: #d8b4fe;">
+                        <span style="font-size: 1.5rem;">🧠</span> Asistente Técnico IA del Proyecto
+                    </h3>
+                    <p style="font-size: 0.9rem; color: #e9d5ff;">¡Hola! Fui entrenado con el Documento Oficial "Robótica" del equipo. Consultame sobre los materiales, cómo resolvimos los errores, quiénes somos o cómo conectar la app.</p>
+                    
+                    <div class="chat-box" id="chatBox">
+                        <div class="chat-msg ai">Sistema IA iniciado. ¿Qué te gustaría saber sobre nuestro prototipo o el proceso de diseño?</div>
                     </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <span>No encuentro al robot en la lista de Bluetooth</span>
-                            <span class="accordion-icon">+</span>
-                        </button>
-                        <div class="accordion-content">
-                            <p>Asegurate de que el interruptor del auto esté prendido. Si el módulo Bluetooth tiene una lucecita roja que parpadea rápido, significa que está listo para conectarse. Si está apagado, revisá que las pilas estén bien puestas.</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <span>El robot anda muy lento o la garra no tiene fuerza</span>
-                            <span class="accordion-icon">+</span>
-                        </button>
-                        <div class="accordion-content">
-                            <p>¡Se está quedando sin batería! Como dice el manual, apagá el robot y dejalo cargando entre 3 y 4 horas para que los motores vuelvan a tener toda su potencia.</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <span>El robot va para atrás cuando aprieto "Adelante"</span>
-                            <span class="accordion-icon">+</span>
-                        </button>
-                        <div class="accordion-content">
-                            <p>Es un problema muy común. Significa que los cables de ese motor están conectados al revés en la placa. Solo tenés que agarrar los dos cables de esa rueda específica y darlos vuelta.</p>
-                        </div>
-                    </div>
-
-                    <div class="accordion-item">
-                        <button class="accordion-header">
-                            <span>La garra se traba o hace un ruido raro ("clack clack")</span>
-                            <span class="accordion-icon">+</span>
-                        </button>
-                        <div class="accordion-content">
-                            <p>Los engranajes del servomotor se están forzando. Esto pasa si intentás agarrar algo demasiado grande o pesado que supera la apertura máxima de la pinza. Soltá el botón en la app para evitar que se rompa el plástico impreso.</p>
-                        </div>
+                    <div class="chat-input-container">
+                        <input type="text" id="chatInput" class="chat-input" placeholder="Ej: ¿Por qué no hicieron una araña? o ¿Qué hace el Puente H?">
+                        <button class="chat-send-btn" onclick="sendAiMessage()">Preguntar</button>
                     </div>
                 </div>
             </div>
@@ -317,7 +413,7 @@
             <div class="container animate-on-scroll">
                 <div class="section-meta">07 / RECURSOS Y SOFTWARE</div>
                 <h2>Centro de Descargas</h2>
-                <p style="margin-bottom: 30px;">Acá podés descargar la aplicación para el celular o ver cómo programamos el código del robot.</p>
+                <p style="margin-bottom: 30px;">Acá podés descargar la aplicación para el celular o revisar el repositorio con el código fuente en C++.</p>
                 
                 <div class="grid-two-cols" style="gap: 20px;">
                     <div class="glass-card premium-card text-center" style="display: flex; flex-direction: column; justify-content: space-between;">
@@ -325,7 +421,6 @@
                             <span style="font-size: 3rem; display:block; margin-bottom: 15px;">📱</span>
                             <h3 style="margin-bottom: 15px;">App Android Oficial</h3>
                             <p style="margin-bottom: 20px;">Descargá el archivo APK para instalar nuestra aplicación y poder controlar el auto y la garra por Bluetooth.</p>
-                            
                             <div style="background: rgba(0,0,0,0.15); padding: 15px; border-radius: 12px; margin-bottom: 25px; display: inline-block;">
                                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=https://robot4w.github.io/app" alt="Código QR App" style="border-radius: 8px;">
                                 <p style="font-size: 0.8rem; margin-top: 10px; margin-bottom: 0; opacity: 0.8;">Escaneá para descargar</p>
@@ -338,9 +433,9 @@
                         <div>
                             <span style="font-size: 3rem; display:block; margin-bottom: 15px;">💻</span>
                             <h3 style="margin-bottom: 15px; color: #4ade80;">Código del Arduino</h3>
-                            <p style="margin-bottom: 25px;">Si querés ver cómo programamos la placa Arduino para que lea las señales del Bluetooth y mueva los motores, podés revisar nuestro repositorio.</p>
+                            <p style="margin-bottom: 25px;">Revisá cómo programamos la placa Arduino Uno para que procese las señales enviadas por Bluetooth y accione el Puente H.</p>
                         </div>
-                        <a href="https://github.com/HackyntoshDX/RobotX4C.Garra" target="_blank" class="action-btn" style="background: linear-gradient(135deg, #16a34a, #22c55e); color: white; border: none;">Ver Código en GitHub</a>
+                        <a href="https://github.com/HackyntoshDX/RobotX4C.Garra" target="_blank" class="action-btn" style="background: linear-gradient(135deg, #16a34a, #22c55e); color: white; border: none;">Ver Repositorio en GitHub</a>
                     </div>
                 </div>
             </div>
@@ -351,17 +446,104 @@
         <button id="back-to-top" class="action-btn">▲ Volver al Inicio</button>
     </div>
 
-    <div id="easter-egg-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5, 8, 15, 0.98); z-index: 99999; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; padding: 20px;">
-        <span style="font-size: 5rem; margin-bottom: 20px; filter: drop-shadow(0 0 20px #4ade80);">🤖</span>
-        <h2 style="color: #4ade80; font-size: 2.5rem; margin-bottom: 10px; font-weight: 800;">¡Acceso de Desarrollador Activado!</h2>
-        <p style="font-size: 1.1rem; max-width: 600px; margin-bottom: 30px; opacity: 0.9;">¡Encontraste el panel secreto de los creadores! El código maestro del proyecto es:<br><strong style="color: #3b82f6; font-size: 1.5rem; letter-spacing: 2px; display: inline-block; margin-top: 10px;">#4W-ROBOTICA-2026</strong></p>
-        <button id="close-easter-egg" class="action-btn" style="background: #ef4444; border: none; padding: 12px 30px; color: white; cursor: pointer;">Cerrar Consola</button>
-    </div>
-
     <footer class="footer">
-        <p>© 2026 Robot Project. Documentación Oficial - 4to 1ra.</p>
+        <p>© 2026 Robot Project. Documentación Oficial - 4to 1ra. Desarrollado por el equipo.</p>
     </footer>
 
+    <script>
+        // Lógica del Visor 3D Multi-Archivo
+        function switchModel(modelPath) {
+            const viewer = document.getElementById('robotViewer');
+            const downloadLink = document.getElementById('downloadModelLink');
+            viewer.src = modelPath;
+            downloadLink.href = modelPath;
+            if (window.event) {
+                document.querySelectorAll('.btn-3d').forEach(btn => btn.classList.remove('active'));
+                window.event.target.classList.add('active');
+            }
+        }
+
+        // BASE DE CONOCIMIENTO IA ALIMENTADA POR EL DOC DE GOOGLE DRIVE "ROBÓTICA"
+        const aiKnowledge = [
+            {
+                keywords: ["araña", "aracnido", "seis patas", "6 patas"],
+                response: "Al principio pensábamos hacer un robot arácnido de seis patas. Lo descartamos porque el espacio era muy diminuto (no nos beneficiaba para las pilas) y porque queríamos tener mejor estabilidad y soporte para la garra. Por eso pasamos a un chasis de auto de 4 ruedas."
+            },
+            {
+                keywords: ["trailer", "remolque", "atras"],
+                response: "En un momento íbamos a agregarle un tráiler detrás del auto para transportar la garra. Sin embargo, nos dimos cuenta de que si la garra llegaba a sostener algo pesado, haría palanca y se caería hacia atrás. Por eso elegimos usar un auto más grande y espacioso que soporte el peso en el lomo."
+            },
+            {
+                keywords: ["mano", "humanoide", "mano humanoide"],
+                response: "Pensamos en hacer una mano humanoide impresa en 3D para que el proyecto fuera más llamativo. Al ver los archivos notamos que eran demasiadas piezas y era muy difícil de ensamblar. Por eso optamos por una garra mecánica de dos pinzas, que es más rápida de armar y ofrece mayor precisión."
+            },
+            {
+                keywords: ["puente h", "driver"],
+                response: "El Puente H es un componente clave. Se encarga de manejar todo el sistema de movimiento, administrando tanto el voltaje que entra a los 4 motores como a la placa base."
+            },
+            {
+                keywords: ["arduino", "placa", "cerebro"],
+                response: "Utilizamos una placa Arduino Uno. Es el procesador central de todo el vehículo: maneja cuándo se activan los motores de las ruedas, procesa las señales del Bluetooth y controla los servomotores de la garra."
+            },
+            {
+                keywords: ["garra", "pinzas", "azul"],
+                response: "La garra evolucionó. Después de descartar la mano humanoide, probamos una garra azul ancha de tres pinzas. Finalmente nos decidimos por un diseño más ligero y 'flaco' de dos pinzas, que nos brindó un mejor agarre y mayor estabilidad para no desequilibrar el auto."
+            },
+            {
+                keywords: ["objetivo", "proposito", "para que", "fin"],
+                response: "Nuestros objetivos son: 1. Permitir recoger objetos a distancia sin moverse. 2. Ofrecer un aparato divertido y satisfactorio para usar. 3. Brindar experiencias dinámicas aptas para usuarios desde los 3 hasta los 99 años."
+            },
+            {
+                keywords: ["materiales", "componentes", "usaron", "que tiene"],
+                response: "Para el proyecto usamos: 4 Motores DC, un Puente H, placa Arduino Uno, servomotores para la garra, cables Dupont, módulo Bluetooth, portapilas (3V) e imprimimos en 3D el chasis y la garra con filamento."
+            },
+            {
+                keywords: ["encender", "prender", "cargar", "bateria"],
+                response: "Para usarlo, colocá las pilas de 3V. Si pierde fuerza, dejalo cargando de 3 a 4 horas. Luego simplemente encendelo desde la perilla lateral, abrí nuestra App y conectalo por Bluetooth."
+            },
+            {
+                keywords: ["aplicaciones", "programas", "diseño", "impresion"],
+                response: "Para buscar y preparar las piezas 3D usamos plataformas gratuitas: Thingiverse.com, Printables.com y Makerworld.com. Luego utilizamos Tinkercad para acomodar las piezas de forma ordenada e imprimirlas."
+            },
+            {
+                keywords: ["integrantes", "equipo", "quienes"],
+                response: "Somos alumnos de 4to 1ra del año 2026. El equipo está integrado por: Bautista Jorquera, Eduardo Romeu, Gastelo Briquis, Axl Machado, Laila Condori, Agostina Cabrera, Camila Polanco y Sonia Godoy."
+            }
+        ];
+
+        function sendAiMessage() {
+            const input = document.getElementById('chatInput');
+            const box = document.getElementById('chatBox');
+            const text = input.value.trim().toLowerCase();
+            if(!text) return;
+
+            // Mostrar pregunta del usuario
+            box.innerHTML += `<div class="chat-msg user">${input.value}</div>`;
+            input.value = '';
+            box.scrollTop = box.scrollHeight;
+
+            // Simular tiempo de pensamiento y analizar keywords
+            setTimeout(() => {
+                let reply = "Esa es una gran pregunta, pero no encuentro ese detalle en la documentación oficial de la bitácora. ¡Asegurate de revisar el código fuente o preguntarle a los desarrolladores del equipo!";
+                
+                for (let i = 0; i < aiKnowledge.length; i++) {
+                    const match = aiKnowledge[i].keywords.some(kw => text.includes(kw));
+                    if (match) {
+                        reply = aiKnowledge[i].response;
+                        break;
+                    }
+                }
+                
+                // Mostrar respuesta IA
+                box.innerHTML += `<div class="chat-msg ai">${reply}</div>`;
+                box.scrollTop = box.scrollHeight;
+            }, 700);
+        }
+
+        document.getElementById('chatInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendAiMessage();
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
