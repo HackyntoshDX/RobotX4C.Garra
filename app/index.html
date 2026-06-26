@@ -12,7 +12,39 @@
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.3.1/model-viewer.min.js"></script>
     
     <style>
-        /* Parches críticos para vista móvil y Android sin tocar tus clases globales */
+        /* ==================================================
+           TEMA MOONLIGHT (VIOLETAS) 
+           ================================================== */
+        body.theme-moonlight {
+            --bg-principal: #120924 !important;
+            --texto-primario: #f3e8ff !important;
+            --acento: #a855f7 !important;
+            background-color: #120924 !important;
+            color: #f3e8ff !important;
+        }
+        body.theme-moonlight .glass-card {
+            background: rgba(168, 85, 247, 0.08) !important;
+            border-color: rgba(168, 85, 247, 0.3) !important;
+        }
+        body.theme-moonlight .gradient-text {
+            background: linear-gradient(to right, #c084fc, #8b5cf6) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+        body.theme-moonlight .floating-nav {
+            background: rgba(18, 9, 36, 0.85) !important;
+            border-color: rgba(168, 85, 247, 0.4) !important;
+        }
+        body.theme-moonlight .nav-links li a:hover {
+            color: #c084fc !important;
+        }
+        body.theme-moonlight .btn-3d.active {
+            background: #9333ea !important;
+            border-color: #a855f7 !important;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5) !important;
+        }
+
+        /* Parches críticos para vista móvil y Android */
         html, body {
             overflow-x: hidden;
             width: 100%;
@@ -70,107 +102,93 @@
             width: 100%;
         }
         .selector-3d {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
+            display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;
         }
         .btn-3d {
-            background: rgba(255,255,255,0.1);
-            color: inherit;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1); color: inherit; border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 16px; border-radius: 8px; cursor: pointer; font-family: 'Inter', sans-serif;
+            font-size: 0.9rem; transition: all 0.3s ease;
         }
         .btn-3d.active {
-            background: #3b82f6;
-            border-color: #60a5fa;
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+            background: #3b82f6; border-color: #60a5fa; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
         }
         model-viewer {
-            width: 100%;
-            height: 400px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
+            width: 100%; height: 400px; background-color: rgba(0, 0, 0, 0.3); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
         }
-        .download-3d-container {
-            margin-top: 10px;
-            display: flex;
-            justify-content: flex-end;
+        .download-3d-container { margin-top: 10px; display: flex; justify-content: flex-end; }
+
+        /* ==================================================
+           ACORDEÓN DE PREGUNTAS (FAQ RESTAURADO)
+           ================================================== */
+        .accordion-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .accordion-header {
+            width: 100%; text-align: left; padding: 15px; background: transparent; border: none;
+            color: white; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .accordion-content {
+            padding: 0 15px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+            font-size: 0.95rem; opacity: 0.8;
         }
 
-        /* Estilos del Módulo de la IA */
-        .ai-chat-card {
-            margin-top: 30px;
-            border-color: rgba(168, 85, 247, 0.4) !important;
-            background: linear-gradient(145deg, rgba(20,20,30,0.8), rgba(30,20,40,0.8));
+        /* ==================================================
+           CHATBOT FLOTANTE ESTILO WHATSAPP (SEPARADO)
+           ================================================== */
+        .ai-fab {
+            position: fixed; bottom: 20px; right: 20px; width: 65px; height: 65px;
+            background: #25d366; /* Verde WhatsApp */
+            color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 32px; cursor: pointer; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.5);
+            z-index: 9999; transition: transform 0.3s, box-shadow 0.3s;
         }
-        .chat-box {
-            height: 250px;
-            overflow-y: auto;
-            background: rgba(0,0,0,0.3);
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            border: 1px solid rgba(255,255,255,0.05);
+        .ai-fab:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.7); }
+        
+        .ai-chat-window {
+            position: fixed; bottom: 95px; right: 20px; width: 350px; height: 500px; max-width: calc(100vw - 40px);
+            background: #0b141a; /* Fondo WhatsApp Dark */
+            border: 1px solid #202c33; border-radius: 15px;
+            display: flex; flex-direction: column; z-index: 9998;
+            transform: translateY(20px) scale(0.9); opacity: 0; pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
         }
-        .chat-msg {
-            padding: 10px 14px;
-            border-radius: 8px;
-            max-width: 85%;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            animation: fadeIn 0.3s ease;
+        .ai-chat-window.active { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
+        
+        .chat-header {
+            background: #202c33; padding: 15px; border-bottom: 1px solid #2a3942;
+            display: flex; justify-content: space-between; align-items: center; font-weight: 800; color: #e9edef;
         }
-        .chat-msg.user {
-            background: #3b82f6;
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 2px;
+        .close-chat-btn { background: none; border: none; color: #aebac1; font-size: 24px; cursor: pointer; }
+        
+        .chat-box { 
+            flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px;
+            background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 20px 20px;
         }
-        .chat-msg.ai {
-            background: rgba(168, 85, 247, 0.2);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            color: #f3e8ff;
-            align-self: flex-start;
-            border-bottom-left-radius: 2px;
-        }
-        .chat-input-container { display: flex; gap: 10px; }
-        .chat-input {
-            flex: 1;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            padding: 12px;
-            border-radius: 8px;
-            color: white;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s;
-        }
-        .chat-input:focus {
-            outline: none;
-            border-color: #a855f7;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
-        }
-        .chat-send-btn {
-            background: #a855f7;
-            color: white;
-            border: none;
-            padding: 0 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-        .chat-send-btn:hover { background: #9333ea; }
+        .chat-msg { padding: 10px 14px; max-width: 80%; font-size: 0.95rem; line-height: 1.4; animation: fadeIn 0.3s ease; box-shadow: 0 1px 2px rgba(0,0,0,0.3); font-family: 'Inter', sans-serif; letter-spacing: 0.2px; }
+        .chat-msg.user { background: #005c4b; color: #e9edef; align-self: flex-end; border-radius: 12px 0px 12px 12px; }
+        .chat-msg.ai { background: #202c33; color: #e9edef; align-self: flex-start; border-radius: 0px 12px 12px 12px; }
+        
+        .chat-input-area { padding: 10px; background: #202c33; display: flex; gap: 10px; }
+        .chat-input { flex: 1; background: #2a3942; border: none; padding: 12px 20px; border-radius: 24px; color: #d1d7db; font-family: 'Inter', sans-serif; outline: none; }
+        .chat-send-btn { background: #00a884; color: #111b21; border: none; width: 42px; height: 42px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .chat-send-btn:hover { background: #02c299; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Animación de "escribiendo..." */
+        .typing-indicator span {
+            display: inline-block; width: 5px; height: 5px; background-color: #8696a0; border-radius: 50%; margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
     </style>
 </head>
 <body class="theme-dark">
@@ -194,6 +212,7 @@
         <div class="theme-switchers">
             <button class="control-btn theme-btn" data-theme="theme-light" title="Modo Claro">☀️</button>
             <button class="control-btn theme-btn active" data-theme="theme-dark" title="Modo Oscuro">🌙</button>
+            <button class="control-btn theme-btn" data-theme="theme-moonlight" title="Modo Moonlight (Violeta)">🌌</button>
             <button class="control-btn theme-btn" data-theme="theme-frutiger" title="Modo Frutiger Aero">🐬</button>
             <button class="control-btn" id="access-toggle" title="Modo Accesibilidad" style="margin-left: 6px; background: rgba(255,255,255,0.15);">👁️</button>
         </div>
@@ -204,10 +223,10 @@
         <ul class="nav-links">
             <li><a href="#introduccion">Proyecto</a></li>
             <li><a href="#materiales">Materiales</a></li>
-            <li><a href="#galeria">Armado</a></li>
+            <li><a href="#visor3d">Diseños</a></li>
             <li><a href="#manual">Manual de Uso</a></li>
             <li><a href="#desarrollo">Desarrollo</a></li>
-            <li><a href="#faq">Diagnóstico & IA</a></li>
+            <li><a href="#faq">Diagnóstico</a></li>
             <li><a href="#descargas">Descargas</a></li>
         </ul>
     </nav>
@@ -389,21 +408,42 @@
 
         <section id="faq" class="content-section">
             <div class="container animate-on-scroll">
-                <div class="section-meta">06 / SOPORTE TÉCNICO</div>
-                <h2>Diagnóstico & Inteligencia Artificial</h2>
+                <div class="section-meta">06 / DIAGNÓSTICO</div>
+                <h2>Problemas Comunes (FAQ)</h2>
+                <p style="margin-bottom: 25px;">Si el robot presenta algún error, desplegá estas opciones para ver la solución rápida. Si no la encontrás acá, ¡escribile a nuestro Asistente Técnico tocando el botón del robot flotante!</p>
                 
-                <div class="glass-card premium-card ai-chat-card">
-                    <h3 style="font-weight: 800; display: flex; align-items: center; gap: 10px; color: #d8b4fe;">
-                        <span style="font-size: 1.5rem;">🧠</span> Asistente Técnico IA del Proyecto
-                    </h3>
-                    <p style="font-size: 0.9rem; color: #e9d5ff;">¡Hola! Fui entrenado con el Documento Oficial "Robótica" del equipo. Consultame sobre los materiales, cómo resolvimos los errores, quiénes somos o cómo conectar la app.</p>
-                    
-                    <div class="chat-box" id="chatBox">
-                        <div class="chat-msg ai">Sistema IA iniciado. ¿Qué te gustaría saber sobre nuestro prototipo o el proceso de diseño?</div>
+                <div class="accordion-container">
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>¿Por qué la App me pide activar la Ubicación?</span> <span>+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p style="margin-top: 10px;">No te preocupes, la aplicación no rastrea tu GPS. Los celulares Android piden que actives la Ubicación sí o sí para poder usar el escáner de Bluetooth y encontrar la placa del robot. Solo dale a "Permitir".</p>
+                        </div>
                     </div>
-                    <div class="chat-input-container">
-                        <input type="text" id="chatInput" class="chat-input" placeholder="Ej: ¿Por qué no hicieron una araña? o ¿Qué hace el Puente H?">
-                        <button class="chat-send-btn" onclick="sendAiMessage()">Preguntar</button>
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>No encuentro al robot en la lista de Bluetooth</span> <span>+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p style="margin-top: 10px;">Asegurate de que el interruptor del auto esté prendido. Si el módulo Bluetooth tiene una lucecita roja que parpadea rápido, significa que está listo para conectarse. Si está apagado, revisá que las pilas estén bien puestas.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>El robot anda muy lento o la garra no tiene fuerza</span> <span>+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p style="margin-top: 10px;">¡Se está quedando sin batería! Como dice el manual, apagá el robot y dejalo cargando entre 3 y 4 horas para que los motores vuelvan a tener toda su potencia.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>El robot va para atrás cuando aprieto "Adelante"</span> <span>+</span>
+                        </button>
+                        <div class="accordion-content">
+                            <p style="margin-top: 10px;">Es un problema muy común. Significa que los cables de ese motor están conectados al revés en la placa. Solo tenés que agarrar los dos cables de esa rueda específica y darlos vuelta.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -442,6 +482,24 @@
         </section>
     </main>
 
+    <div class="ai-fab" id="aiFab" onclick="toggleChat()" title="Hablar con Soporte Técnico">
+        🤖
+    </div>
+
+    <div class="ai-chat-window" id="aiChatWindow">
+        <div class="chat-header">
+            <span style="display: flex; align-items: center; gap: 8px;">🤖 Asistente Técnico (IA)</span>
+            <button class="close-chat-btn" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-box" id="chatBox">
+            <div class="chat-msg ai">¡Hola! Fui entrenado con la bitácora oficial del grupo "Robótica". Preguntame sobre el puente H, por qué no hicimos la araña, los integrantes, o cómo arreglar algún error.</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Preguntame algo..." autocomplete="off">
+            <button class="chat-send-btn" onclick="sendAiMessage()">➤</button>
+        </div>
+    </div>
+
     <div class="bottom-navigation">
         <button id="back-to-top" class="action-btn">▲ Volver al Inicio</button>
     </div>
@@ -451,7 +509,29 @@
     </footer>
 
     <script>
-        // Lógica del Visor 3D Multi-Archivo
+        // Quitar pantalla de carga (Agregado para que no se quede trabado)
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => preloader.style.display = 'none', 500);
+                }, 500);
+            }
+        });
+
+        // Selector de Temas
+        const themeBtns = document.querySelectorAll('.theme-btn');
+        themeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const newTheme = btn.getAttribute('data-theme');
+                document.body.className = newTheme;
+                themeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Visor 3D Multi-Archivo
         function switchModel(modelPath) {
             const viewer = document.getElementById('robotViewer');
             const downloadLink = document.getElementById('downloadModelLink');
@@ -463,81 +543,132 @@
             }
         }
 
-        // BASE DE CONOCIMIENTO IA ALIMENTADA POR EL DOC DE GOOGLE DRIVE "ROBÓTICA"
+        // Acordeón del FAQ
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                content.style.maxHeight = '0px';
+                content.style.padding = '0 15px';
+            } else {
+                content.style.maxHeight = content.scrollHeight + 20 + 'px';
+                content.style.padding = '10px 15px';
+            }
+        }
+
+        // CONTROL DEL CHATBOT FLOTANTE
+        function toggleChat() {
+            const chatWindow = document.getElementById('aiChatWindow');
+            chatWindow.classList.toggle('active');
+            if(chatWindow.classList.contains('active')) {
+                document.getElementById('chatInput').focus();
+            }
+        }
+
+        // IA MEJORADA (Base de datos del Google Doc original)
         const aiKnowledge = [
             {
+                // Easter Egg Premium
+                regex: /1\s*\+\s*1|uno\s*mas\s*uno/,
+                response: "¡EPA! 🛑 Para cálculos de tan extrema complejidad vas a tener que suscribirte a la versión Premium 💸🤣."
+            },
+            {
                 keywords: ["araña", "aracnido", "seis patas", "6 patas"],
-                response: "Al principio pensábamos hacer un robot arácnido de seis patas. Lo descartamos porque el espacio era muy diminuto (no nos beneficiaba para las pilas) y porque queríamos tener mejor estabilidad y soporte para la garra. Por eso pasamos a un chasis de auto de 4 ruedas."
+                response: "Al principio pensábamos hacer un robot arácnido de seis patas. Lo descartamos porque el espacio interno era diminuto para las pilas y el diseño perdía mucha estabilidad al sumarle el peso de la garra arriba. El auto de 4 ruedas nos dio la solución."
             },
             {
                 keywords: ["trailer", "remolque", "atras"],
-                response: "En un momento íbamos a agregarle un tráiler detrás del auto para transportar la garra. Sin embargo, nos dimos cuenta de que si la garra llegaba a sostener algo pesado, haría palanca y se caería hacia atrás. Por eso elegimos usar un auto más grande y espacioso que soporte el peso en el lomo."
+                response: "En un momento íbamos a agregarle un tráiler detrás del auto para transportar la garra. Sin embargo, nos dimos cuenta de que si la garra agarraba algo pesado, haría palanca y se volcaría hacia atrás. Por eso agrandamos la base."
             },
             {
                 keywords: ["mano", "humanoide", "mano humanoide"],
-                response: "Pensamos en hacer una mano humanoide impresa en 3D para que el proyecto fuera más llamativo. Al ver los archivos notamos que eran demasiadas piezas y era muy difícil de ensamblar. Por eso optamos por una garra mecánica de dos pinzas, que es más rápida de armar y ofrece mayor precisión."
+                response: "Pensamos en imprimir una mano humanoide en 3D para hacerlo más llamativo, pero eran demasiadas piezas y súper frágiles. Optamos por la garra de dos pinzas porque es más rápida de armar, gasta menos filamento y ofrece un agarre preciso."
             },
             {
                 keywords: ["puente h", "driver"],
-                response: "El Puente H es un componente clave. Se encarga de manejar todo el sistema de movimiento, administrando tanto el voltaje que entra a los 4 motores como a la placa base."
+                response: "El Puente H es el verdadero administrador de energía del auto. Es el encargado de recibir el voltaje alto, pasarlo a los 4 motores para que puedan girar hacia adelante o atrás, y además alimenta a la placa Arduino de forma segura."
             },
             {
                 keywords: ["arduino", "placa", "cerebro"],
-                response: "Utilizamos una placa Arduino Uno. Es el procesador central de todo el vehículo: maneja cuándo se activan los motores de las ruedas, procesa las señales del Bluetooth y controla los servomotores de la garra."
+                response: "Utilizamos una placa Arduino Uno. Es el procesador central (el cerebro) de todo el vehículo: procesa los comandos que le llegan desde tu celular por Bluetooth y les manda las señales eléctricas a los servomotores y al puente H."
             },
             {
                 keywords: ["garra", "pinzas", "azul"],
-                response: "La garra evolucionó. Después de descartar la mano humanoide, probamos una garra azul ancha de tres pinzas. Finalmente nos decidimos por un diseño más ligero y 'flaco' de dos pinzas, que nos brindó un mejor agarre y mayor estabilidad para no desequilibrar el auto."
+                response: "La garra tuvo tres versiones: primero la mano humanoide (descartada por complejidad), luego una garra azul ancha de tres pinzas, y finalmente el diseño actual: una versión ligera de dos pinzas sugerida por el profesor que mejoró por completo la estabilidad."
             },
             {
                 keywords: ["objetivo", "proposito", "para que", "fin"],
-                response: "Nuestros objetivos son: 1. Permitir recoger objetos a distancia sin moverse. 2. Ofrecer un aparato divertido y satisfactorio para usar. 3. Brindar experiencias dinámicas aptas para usuarios desde los 3 hasta los 99 años."
+                response: "Nuestro objetivo es facilitar la vida: permitir que recojas objetos a distancia sin tener que moverte (ideal para personas con movilidad reducida) y a la vez ofrecer un dispositivo súper divertido para usuarios desde los 3 a los 99 años."
             },
             {
                 keywords: ["materiales", "componentes", "usaron", "que tiene"],
-                response: "Para el proyecto usamos: 4 Motores DC, un Puente H, placa Arduino Uno, servomotores para la garra, cables Dupont, módulo Bluetooth, portapilas (3V) e imprimimos en 3D el chasis y la garra con filamento."
+                response: "Usamos 4 Motores DC, un Puente H, la placa Arduino Uno, servomotores (para abrir/cerrar la garra), cables Dupont, un módulo Bluetooth y piezas del chasis impresas enteramente en plástico PLA."
             },
             {
                 keywords: ["encender", "prender", "cargar", "bateria"],
-                response: "Para usarlo, colocá las pilas de 3V. Si pierde fuerza, dejalo cargando de 3 a 4 horas. Luego simplemente encendelo desde la perilla lateral, abrí nuestra App y conectalo por Bluetooth."
+                response: "Para usar el robot, colocá las pilas de 3V. Si pierde fuerza (anda lento), apagalo de la perilla y dejalo cargando unas 3 o 4 horas. Luego encendé la perilla, abrí nuestra App en tu celular y tocale 'Conectar Robot'."
             },
             {
-                keywords: ["aplicaciones", "programas", "diseño", "impresion"],
-                response: "Para buscar y preparar las piezas 3D usamos plataformas gratuitas: Thingiverse.com, Printables.com y Makerworld.com. Luego utilizamos Tinkercad para acomodar las piezas de forma ordenada e imprimirlas."
+                keywords: ["aplicaciones", "programas", "diseño", "impresion", "app"],
+                response: "Buscamos modelos base en Thingiverse, Printables y Makerworld. Luego importamos todo en Tinkercad para acomodar las piezas, escalarlas al tamaño del Arduino y mandarlas a la impresora 3D del compañero del grupo."
             },
             {
                 keywords: ["integrantes", "equipo", "quienes"],
-                response: "Somos alumnos de 4to 1ra del año 2026. El equipo está integrado por: Bautista Jorquera, Eduardo Romeu, Gastelo Briquis, Axl Machado, Laila Condori, Agostina Cabrera, Camila Polanco y Sonia Godoy."
+                response: "Somos los genios de 4to 1ra del 2026. El equipo lo formamos: Bauti Jorquera, Edu Romeu, Gady Briones, Axl Machado, Laila Condori, Agos Cabrera, Cami Polanco y Sonia Godoy."
             }
         ];
+
+        // Normalización avanzada (sin tildes, minúsculas, elimina signos de interrogación)
+        function normalizeText(text) {
+            return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s\+]/gi, '').trim();
+        }
 
         function sendAiMessage() {
             const input = document.getElementById('chatInput');
             const box = document.getElementById('chatBox');
-            const text = input.value.trim().toLowerCase();
-            if(!text) return;
+            const rawText = input.value.trim();
+            if(!rawText) return;
 
-            // Mostrar pregunta del usuario
-            box.innerHTML += `<div class="chat-msg user">${input.value}</div>`;
+            // Muestra lo que el usuario escribió (textRaw)
+            box.innerHTML += `<div class="chat-msg user">${rawText}</div>`;
             input.value = '';
             box.scrollTop = box.scrollHeight;
 
-            // Simular tiempo de pensamiento y analizar keywords
+            const cleanInputText = normalizeText(rawText);
+            const typingId = "typing-" + Date.now();
+
+            // Simula el "Escribiendo..." 
             setTimeout(() => {
-                let reply = "Esa es una gran pregunta, pero no encuentro ese detalle en la documentación oficial de la bitácora. ¡Asegurate de revisar el código fuente o preguntarle a los desarrolladores del equipo!";
+                box.innerHTML += `
+                    <div class="chat-msg ai typing-indicator" id="${typingId}">
+                        <span></span><span></span><span></span>
+                    </div>`;
+                box.scrollTop = box.scrollHeight;
+            }, 300);
+
+            // Responde
+            setTimeout(() => {
+                let reply = "Uf, esa es una pregunta interesante, pero no tengo ese detalle registrado en la bitácora original. ¡Deberías preguntarle directamente a los desarrolladores del grupo en la entrega del proyecto!";
                 
                 for (let i = 0; i < aiKnowledge.length; i++) {
-                    const match = aiKnowledge[i].keywords.some(kw => text.includes(kw));
-                    if (match) {
-                        reply = aiKnowledge[i].response;
+                    const entry = aiKnowledge[i];
+                    
+                    if (entry.regex && entry.regex.test(rawText)) {
+                        reply = entry.response;
+                        break;
+                    }
+                    if (entry.keywords && entry.keywords.some(kw => cleanInputText.includes(normalizeText(kw)))) {
+                        reply = entry.response;
                         break;
                     }
                 }
                 
-                // Mostrar respuesta IA
+                // Borra el typing y muestra el msj real
+                const typingEl = document.getElementById(typingId);
+                if(typingEl) typingEl.remove();
+                
                 box.innerHTML += `<div class="chat-msg ai">${reply}</div>`;
                 box.scrollTop = box.scrollHeight;
-            }, 700);
+            }, 1500); 
         }
 
         document.getElementById('chatInput')?.addEventListener('keypress', function(e) {
